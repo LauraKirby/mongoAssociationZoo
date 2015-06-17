@@ -82,8 +82,18 @@ app.put('/zoos/:id', function(req, res){
 
 //DESTROY
 app.delete('/zoos/:id', function(req, res){
-	res.redirect("/zoos"); 
-})
+	db.Zoo.findById(req.params.id, 
+		function(err, zoo){
+			if(err) {
+				console.log(err); 
+				res.render("zoos/show"); 
+			}
+			else {
+				zoo.remove(); 
+				res.redirect("/zoos"); 
+			}
+		});
+});
 
 //-------- ANIMAL ROUTES ----------//
 
