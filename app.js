@@ -31,7 +31,17 @@ app.get('/zoos/new', function(req, res){
 
 //CREATE
 app.post('/zoos', function(req, res){
-	res.redirect("/zoos");
+	db.Zoo.create({name: req.body.name, location: req.body.location}, 
+		function(err, zoo) {
+			if(err){
+				console.log(err); 
+				res.render("zoos/new"); 
+			}
+			else {
+				console.log(zoo); 
+				res.redirect("/zoos"); 
+			}
+		});
 });
 
 //SHOW
