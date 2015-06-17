@@ -1,3 +1,18 @@
 <% include ../partials/header %>
-<h3>Animals "Index" Page</h3>
+<p><h3>Animals "Index" Page</h3></p>
+
+  <h4>Name: <%= zoo.name%> Location: <%= zoo.location%> </h4>  
+  <% zoo.animals.forEach(function(animal){ %>
+    <p>
+      <a href="/zoos/<%= zoo._id%>/animals/<%= animal._id%>">See More</a>
+      <%= book.title%>
+    </p>
+  <% })%>
+  <a href="/zoos/<%= zoo.id%>/animals/new">Add Animal</a>
+  <p>
+    <a href="/zoos/<%= zoo._id%>/edit">Edit Animal</a>
+  </p>
+  <p>
+    <a href="/zoos">See Zoos</a>
+  </p>
 <% include ../partials/footer %>

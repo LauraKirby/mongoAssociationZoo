@@ -99,12 +99,18 @@ app.delete('/zoos/:id', function(req, res){
 
 //INDEX
 app.get('/zoos/:zoo_id/animals', function(req, res){
-	res.render('animals/index'); 
+	db.Zoo.findById(req.params.zoo_id).populate('animals')
+	.exec(function(err,zoo){
+		res.render("animals/index", {zoo:zoo});
+	});
 });
 
 //NEW
 app.get('/zoos/:zoo_id/animals/new', function(req, res){
-	res.render('animals/new'); 
+	db.Zoo.findById(req.params.zoo_id,
+		function(err, zoo) {
+			res.render('animals/new', {zoo:zoo}); 
+		});
 });
 
 //CREATE
