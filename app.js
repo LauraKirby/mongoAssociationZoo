@@ -46,7 +46,17 @@ app.post('/zoos', function(req, res){
 
 //SHOW
 app.get('/zoos/:id', function(req, res){
-	res.render("zoos/show");
+	db.Zoo.findById(req.params.id, 
+		function(err, zoo) {
+			db.Animal.find(
+			{
+				_id:{$in: zoo.animals}
+			}, 
+			function(err, animals){
+				res.render("zoos/show", {zoo:zoo, animals:animals});
+			});
+		});
+	//console.log(db.Zoo.findById(req.params.id)); 
 });
 
 //EDIT
