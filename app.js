@@ -28,7 +28,7 @@ app.get('/zoos/new', function(req, res){
 
 //CREATE
 app.post('/zoos', function(req, res){
-	res.render("/zoos");
+	res.redirect("/zoos");
 });
 
 //SHOW
@@ -47,12 +47,45 @@ app.put('/zoos', function(req, res){
 });
 //DESTROY
 app.delete('/zoos/:id', function(req, res){
-	res.render("/zoos"); 
+	res.redirect("/zoos"); 
 })
 
 //-------- ANIMAL ROUTES ----------//
 
 //INDEX
+app.get('/zoos/:zoo_id/animals', function(req, res){
+	res.render('animals/index'); 
+});
+
+//NEW
+app.get('/zoos/:zoo_id/animals/new', function(req, res){
+	res.render('animals/new'); 
+});
+
+//CREATE
+app.post('/zoos/:zoo_id/animals', function(req, res){
+	res.redirect('/zoos');
+})
+
+//SHOW
+app.get('/zoos/:zoo_id/animals', function(req, res){
+	res.render('animals/show'); 
+}); 
+
+//EDIT
+app.get('/zoos/:zoo_id/animals/:id/edit', function(req, res){
+	res.render('animals/edit');
+});
+
+//UPDATE
+app.put('/zoos/:zoo_id/animals/:id', function(req, res){
+	res.redirect("/zoos");
+});
+
+//DESTROY
+app.delete('/zoos/:zoo_id/animals/:id', function(req, res){
+	res.redirect("/zoos"); 
+});
 
 
 // CATCH ALL
