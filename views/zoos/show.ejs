@@ -1,7 +1,8 @@
 <% include ../partials/header %>
 <h3>Show Zoo's Animals</h3>
   <p>
-    <%= zoo.name%> <%= zoo.location%>'s animals:
+    Name: <%= zoo.name%> Location: <%= zoo.location%> 
+    <p>Our Animals:</p>
     <% animals.forEach(function(animal){ %>
       <p>
         <a href="/zoos/<%= zoo._id%>/animals/<%= animal.id%>" class ="btn btn-info"><%= animal.name%></a>

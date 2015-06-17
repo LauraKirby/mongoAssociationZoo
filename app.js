@@ -68,9 +68,18 @@ app.get('/zoos/:id/edit', function(req, res){
 });
 
 //UPDATE
-app.put('/zoos', function(req, res){
-	res.render("zoos");
+app.put('/zoos/:id', function(req, res){
+	db.Zoo.findByIdAndUpdate(req.params.id, {name: req.body.name, location: req.body.location},
+		function(err, zoo) {
+			if(err) {
+				res.render("zoos/edit"); 
+			}
+			else {
+				res.redirect("/zoos"); 
+			}
+		});
 });
+
 //DESTROY
 app.delete('/zoos/:id', function(req, res){
 	res.redirect("/zoos"); 
