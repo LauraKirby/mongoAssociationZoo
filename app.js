@@ -18,7 +18,10 @@ app.get('/', function(req, res){
 
 //INDEX
 app.get('/zoos', function(req, res){
-	res.render('zoos/index'); 
+	db.Zoo.find({}, 
+		function(err, zoos){
+			res.render('zoos/index', {zoos:zoos});  
+	});	
 });
 
 //NEW

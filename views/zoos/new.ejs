@@ -1,3 +1,16 @@
 <% include ../partials/header %>
 <h3>Zoo's "New" Page</h3>
+<form action="/zoos" method="POST">
+  <div>
+    <label for="name">Zoo Name:</label>
+    <input autofocus  type="text" name="name" id="name">
+  </div>
+  <div>
+    <label for="location">Location:</label>
+    <input type="text" name="location" id="location">
+  </div>
+  <div>
+    <input type="submit" value="Create New Zoo" class ="btn btn-info">
+  </div>
+</form>
 <% include ../partials/footer %>
