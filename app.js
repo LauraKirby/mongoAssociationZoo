@@ -115,27 +115,68 @@ app.get('/zoos/:zoo_id/animals/new', function(req, res){
 
 //CREATE
 app.post('/zoos/:zoo_id/animals', function(req, res){
-	res.redirect('/zoos');
+	db.Animal.create({name:req.body.name}, function(err, animal){
+    console.log(animal)
+    if(err) {
+      console.log(err);
+      res.render("animals/new");
+    }
+    else {
+      db.Zoo.findById(req.params.zoo_id,function(err,zoo){
+        zoo.animals.push(animal);
+        animal.zoo = zoo._id;
+        animal.save();
+        zoo.save();
+        res.redirect("/zoos/"+ req.params.zoo_id +"/animals");
+      });
+    }
+  });
 })
 
 //SHOW
 app.get('/zoos/:zoo_id/animals', function(req, res){
-	res.render('animals/show'); 
+	  db.Animal.findById(req.params.id)
+    .populate('zoo')
+    .exec(function(err,animal){
+      console.log(animal.zoo)
+      res.render("animals/show", {animal:animal});
+    });
 }); 
 
 //EDIT
 app.get('/zoos/:zoo_id/animals/:id/edit', function(req, res){
-	res.render('animals/edit');
+	  db.Animal.findById(req.params.id)
+    .populate('zoo')
+    .exec(function(err,animal){
+      res.render("animals/edit", {animal:animal});
+    });
 });
 
 //UPDATE
 app.put('/zoos/:zoo_id/animals/:id', function(req, res){
-	res.redirect("/zoos");
+ db.Animal.findByIdAndUpdate(req.params.id, {name:req.body.name},
+     function (err, animal) {
+       if(err) {  
+         res.render("animals/edit");
+       }
+       else {
+         res.redirect("/zoos/" + req.params.zoo_id + "/animals");
+       }
+     });
 });
 
 //DESTROY
 app.delete('/zoos/:zoo_id/animals/:id', function(req, res){
-	res.redirect("/zoos"); 
+ db.Zoo.findByIdAndRemove(req.params.id, {name:req.body.name},
+      function (err, animal) {
+        if(err) {
+          console.log(err);
+          res.render("animals/edit");
+        }
+        else {
+          res.redirect("/zoos/" + req.params.zoo_id + "/animals");
+        }
+      });
 });
 
 

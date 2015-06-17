@@ -1,7 +1,17 @@
 <% include ../partials/header %>
 <p><h3>Animals Edit Page</h3></p>
 
-
+<p>
+  <form action="/zoos/<%= animal.zoo.id%>/animals/<%= animal._id%>?_method=put" method="POST">
+  <div>
+     <label for="name">Name:</label>
+     <input autofocus type="text" name="name" id="name" value="<%= animal.name%>">
+   </div>
+   <div>
+     <input type="submit" value="Update" class ="btn btn-info">
+   </div>
+  </form>
+</p>
 
 
 <% include ../partials/footer %>

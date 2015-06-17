@@ -1,3 +1,12 @@
 <% include ../partials/header %>
-<h3>Animals "Show" Page</h3>
+<p><h3>Animals "Show" Page</h3></p>
+    <p>
+      <a href="/zoos/<%= animal.author._id%>/animals/<%= animal._id%>/edit" class ="btn btn-primary">Edit Animal</a>
+
+      <%= animal.name%>
+
+      <form action="/zoos/<%= animal.author._id%>/animals/<%= animal._id%>?_method=DELETE" method="POST">
+        <input type="submit" value="DELETE">
+      </form>
+    </p>
 <% include ../partials/footer %>
