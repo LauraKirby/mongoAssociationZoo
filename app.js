@@ -61,7 +61,10 @@ app.get('/zoos/:id', function(req, res){
 
 //EDIT
 app.get('/zoos/:id/edit', function(req, res){
-	res.render("zoos/edit"); 
+	db.Zoo.findById(req.params.id, 
+		function(err, zoo){
+			res.render("zoos/edit", {zoo:zoo}); 
+		})
 });
 
 //UPDATE

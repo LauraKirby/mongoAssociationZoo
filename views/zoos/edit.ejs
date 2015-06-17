@@ -1,4 +1,16 @@
 <% include ../partials/header %>
-<h3>Zoo's "Edit" Page</h3>
-
+<p><h3>Zoo's "Edit" Page</h3></p>
+<form action="/zoos/<%= zoo._id%>?_method=put" method="POST">
+	<div>
+		<label for="name">Zoo Name:</label>
+		<input autofocus type="text" name="name" id="name" value = <%= zoo.name%>>
+	</div>
+	<div>
+		<label for="location">Location:</label>
+		<input type="text" name="location" id="location" value = <%= zoo.location%>>
+	</div>
+	<div>
+		<input type="submit" value="Update" class ="btn btn-success">
+	</div>
+</form>
 <% include ../partials/footer %>
